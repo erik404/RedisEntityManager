@@ -5,7 +5,6 @@
     "license": "MIT",
     "require": {
         "predis/predis": "2.0.x-dev",
-        "cache/redis-adapter": "^1.1@dev",
         "doctrine/annotations": "^1.11@dev"
     },
     "authors": [
