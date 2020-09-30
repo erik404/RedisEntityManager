@@ -1,0 +1,22 @@
+{
+    "name": "erik404/redismanager",
+    "type": "library",
+    "description": "A simple approach to ORM for Redis",
+    "require": {
+        "predis/predis": "2.0.x-dev",
+        "cache/redis-adapter": "^1.1@dev",
+        "doctrine/annotations": "^1.11@dev"
+    },
+    "authors": [
+        {
+            "name": "Erik-Jan van de Wal",
+            "email": "ejvandewal@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-0": {
+            "erik404": "src/"
+        }
+    }
+}
