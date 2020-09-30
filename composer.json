@@ -2,6 +2,7 @@
     "name": "erik404/redisentitymanager",
     "type": "library",
     "description": "A simple approach to ORM for Redis",
+    "license": "MIT License",
     "require": {
         "predis/predis": "2.0.x-dev",
         "cache/redis-adapter": "^1.1@dev",
