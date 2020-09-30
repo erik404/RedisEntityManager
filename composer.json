@@ -1,5 +1,5 @@
 {
-    "name": "erik404/redismanager",
+    "name": "erik404/redisentitymanager",
     "type": "library",
     "description": "A simple approach to ORM for Redis",
     "require": {
