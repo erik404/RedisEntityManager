@@ -5,8 +5,8 @@
     "license": "MIT",
     "version": "1.0.0",
     "require": {
-        "predis/predis": "2.0.x-dev",
-        "doctrine/annotations": "^1.11@dev"
+        "predis/predis": "^1.1.6",
+        "doctrine/annotations": "^1.10.4"
     },
     "authors": [
         {
@@ -14,7 +14,7 @@
             "email": "ejvandewal@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "autoload": {
         "psr-0": {
             "erik404": "src/"
