@@ -3,6 +3,7 @@
     "type": "library",
     "description": "A simple approach to ORM for Redis",
     "license": "MIT",
+    "version": "1.0.0",
     "require": {
         "predis/predis": "2.0.x-dev",
         "doctrine/annotations": "^1.11@dev"
@@ -13,7 +14,7 @@
             "email": "ejvandewal@gmail.com"
         }
     ],
-    "minimum-stability": "beta",
+    "minimum-stability": "dev",
     "autoload": {
         "psr-0": {
             "erik404": "src/"
