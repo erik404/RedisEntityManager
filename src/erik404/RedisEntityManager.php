@@ -122,13 +122,17 @@ class RedisEntityManager
     {
         $reflClass = new ReflectionClass($entity);
         $classAnnotations = $this->reader->getClassAnnotations($reflClass);
-        foreach ($classAnnotations as $annotation) {
-            if ($annotation instanceof RedisDataType) {
-                return $this->fetchDataType($annotation->type, $entity, $amount);
+        try{
+            foreach ($classAnnotations as $annotation) {
+                if ($annotation instanceof RedisDataType) {
+                    return $this->fetchDataType($annotation->type, $entity, $amount);
+                }
             }
+        } catch (Exception $e) {
+            // return null for now
         }
 
-        throw new Exception(sprintf("NOTHING TO FETCH"));
+        return null;
     }
 
     /**
