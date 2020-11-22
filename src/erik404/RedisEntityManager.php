@@ -159,17 +159,20 @@ class RedisEntityManager
      * @return object
      * @throws ReflectionException
      */
-    private function fetchHash(string $entity): object
+    private function fetchHash(string $entity): ?object
     {
         $entity = new $entity;
         $hashName = $this->getIdentifierFromEntity(get_class($entity), self::HASH);
         $reflObject = new ReflectionObject($entity);
-        foreach ($reflObject->getProperties() as $property) {
+        try {
+foreach ($reflObject->getProperties() as $property) {
             $prop = $reflObject->getProperty($property->getName());
             $prop->setAccessible(true);
             $prop->setValue($entity, unserialize($this->client->hget($hashName, $property->getName())));
         }
-
+catch (Exception $e) {
+return null;
+}
         return $entity;
     }
 
