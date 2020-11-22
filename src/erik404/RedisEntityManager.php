@@ -169,8 +169,7 @@ foreach ($reflObject->getProperties() as $property) {
             $prop = $reflObject->getProperty($property->getName());
             $prop->setAccessible(true);
             $prop->setValue($entity, unserialize($this->client->hget($hashName, $property->getName())));
-        }
-catch (Exception $e) {
+        } catch (Exception $e) {
 return null;
 }
         return $entity;
