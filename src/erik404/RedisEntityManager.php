@@ -122,7 +122,7 @@ class RedisEntityManager
     {
         $reflClass = new ReflectionClass($entity);
         $classAnnotations = $this->reader->getClassAnnotations($reflClass);
-        try{
+        try {
             foreach ($classAnnotations as $annotation) {
                 if ($annotation instanceof RedisDataType) {
                     return $this->fetchDataType($annotation->type, $entity, $amount);
@@ -164,14 +164,17 @@ class RedisEntityManager
         $entity = new $entity;
         $hashName = $this->getIdentifierFromEntity(get_class($entity), self::HASH);
         $reflObject = new ReflectionObject($entity);
+
         try {
-foreach ($reflObject->getProperties() as $property) {
-            $prop = $reflObject->getProperty($property->getName());
-            $prop->setAccessible(true);
-            $prop->setValue($entity, unserialize($this->client->hget($hashName, $property->getName())));
+            foreach ($reflObject->getProperties() as $property) {
+                $prop = $reflObject->getProperty($property->getName());
+                $prop->setAccessible(true);
+                $prop->setValue($entity, unserialize($this->client->hget($hashName, $property->getName())));
+            }
         } catch (Exception $e) {
-return null;
-}
+            return null;
+        }
+
         return $entity;
     }
 
