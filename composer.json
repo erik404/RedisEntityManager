@@ -3,7 +3,7 @@
     "type": "library",
     "description": "A simple approach to ORM for Redis",
     "license": "MIT",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "require": {
         "predis/predis": "^1.1.6",
         "doctrine/annotations": "^1.10.4"
