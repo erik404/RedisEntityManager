@@ -119,14 +119,14 @@ class RedisEntityManager
      * @return object|array
      * @throws ReflectionException
      */
-    public function fetch(string $entity, int $amount = 1)
+    public function fetch(string $entity, int $amount = 1, $stop = -1)
     {
         $reflClass = new ReflectionClass($entity);
         $classAnnotations = $this->reader->getClassAnnotations($reflClass);
         try {
             foreach ($classAnnotations as $annotation) {
                 if ($annotation instanceof RedisDataType) {
-                    return $this->fetchDataType($annotation->type, $entity, $amount);
+                    return $this->fetchDataType($annotation->type, $entity, $amount, $stop);
                 }
             }
         } catch (TypeError $e) {
@@ -143,13 +143,13 @@ class RedisEntityManager
      * @return object|array
      * @throws ReflectionException
      */
-    private function fetchDataType(string $type, string $entity, int $amount)
+    private function fetchDataType(string $type, string $entity, int $amount, int $stop = -1)
     {
         switch ($type) {
             case self::HASH:
                 return $this->fetchHash($entity);
             case self::LIST:
-                return $this->fetchList($entity, $amount);
+                return $this->fetchList($entity, $amount, $stop);
             default:
                 throw new Exception(sprintf("UNKNOWN DATATYPE (%s)", $type));
         }
@@ -181,11 +181,11 @@ class RedisEntityManager
      * @return array
      * @throws Exception
      */
-    private function fetchList(string $entity, int $amount): array
+    private function fetchList(string $entity, int $amount, int $stop): array
     {
         $listName = $this->getIdentifierFromEntity($entity, self::LIST);
         $result = [];
-        foreach ($this->client->lrange($listName, -$amount, -1) as $listItem) {
+        foreach ($this->client->lrange($listName, -$amount, $stop) as $listItem) {
             $result[] = unserialize($listItem);
         }
 
